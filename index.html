@@ -7,30 +7,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green-dark: #1a3a2a;
-    --green-mid: #2d6a4f;
-    --green-bright: #52b788;
-    --green-light: #95d5b2;
-    --green-pale: #d8f3dc;
-    --gold: #e9c46a;
-    --orange: #f4a261;
-    --red-alert: #e63946;
-    --cream: #fefae0;
-    --text-dark: #081c15;
-    --text-muted: #74c69d;
-    --card-bg: rgba(255,255,255,0.06);
-    --card-border: rgba(149,213,178,0.15);
-    --radius: 16px;
-    --radius-sm: 10px;
-    --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    --bg: #f5f4f0;
+    --bg-2: #eceae4;
+    --surface: #ffffff;
+    --surface-2: #f9f8f5;
+    --border: #e2dfd8;
+    --border-strong: #c8c4bc;
+
+    --green: #3a7d5c;
+    --green-light: #5aad82;
+    --green-pale: #d4efe2;
+    --green-muted: #8fbfa8;
+
+    --amber: #b5830a;
+    --amber-pale: #fdf0d0;
+
+    --red: #c0392b;
+    --red-pale: #fce8e6;
+
+    --text: #1a1916;
+    --text-2: #5a5752;
+    --text-3: #9b9790;
+
+    --radius: 14px;
+    --radius-sm: 9px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+    --transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Syne', sans-serif;
-    background: var(--green-dark);
-    color: #e8f5e9;
+    background: var(--bg-2);
+    color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -40,17 +51,17 @@
     width: 390px;
     min-height: 844px;
     margin: 30px auto;
-    background: var(--green-dark);
+    background: var(--bg);
     border-radius: 44px;
-    border: 2px solid rgba(82,183,136,0.25);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.04);
+    border: 1.5px solid var(--border);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.12), 0 0 0 6px rgba(0,0,0,0.03);
     overflow: hidden;
     position: relative;
   }
 
   .notch {
     width: 120px; height: 32px;
-    background: #0a0a0a;
+    background: #111;
     margin: 0 auto;
     border-radius: 0 0 20px 20px;
     position: relative;
@@ -67,135 +78,119 @@
   }
   .screen.active { display: flex; }
 
-  /* ====== BACKGROUND DECORATIONS ====== */
-  .bg-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
   /* ====== SCREEN 1: LOGIN ====== */
   #screen-login {
-    background: linear-gradient(160deg, #0b2318 0%, #1a3a2a 60%, #0d2b1e 100%);
+    background: var(--surface);
     align-items: center;
     justify-content: center;
-    gap: 0;
     padding: 40px 28px;
+    gap: 0;
   }
 
-  .login-blob1 { width: 300px; height: 300px; background: rgba(82,183,136,0.12); top: -60px; right: -80px; }
-  .login-blob2 { width: 200px; height: 200px; background: rgba(233,196,106,0.08); bottom: 100px; left: -60px; }
-
   .logo-wrap {
-    position: relative;
-    z-index: 1;
     text-align: center;
     margin-bottom: 40px;
     animation: fadeDown 0.8s ease both;
   }
 
   .logo-icon {
-    width: 80px; height: 80px;
-    background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+    width: 76px; height: 76px;
+    background: var(--green-pale);
     border-radius: 24px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
+    font-size: 38px;
     margin: 0 auto 16px;
-    box-shadow: 0 0 40px rgba(82,183,136,0.3);
+    border: 1.5px solid rgba(58,125,92,0.15);
   }
 
   .logo-name {
-    font-size: 32px; font-weight: 800;
+    font-size: 30px; font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(90deg, var(--green-bright), var(--green-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
   }
 
   .logo-sub {
     font-family: 'DM Mono', monospace;
-    font-size: 11px; color: var(--text-muted);
+    font-size: 10px; color: var(--text-3);
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 5px;
   }
 
   .login-card {
-    width: 100%; background: rgba(255,255,255,0.04);
-    border: 1px solid var(--card-border);
+    width: 100%;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 28px;
-    position: relative; z-index: 1;
+    padding: 26px;
     animation: fadeUp 0.8s 0.2s ease both;
-    backdrop-filter: blur(10px);
   }
 
   .login-card h2 {
-    font-size: 18px; font-weight: 700;
-    margin-bottom: 6px;
+    font-size: 17px; font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
   }
 
-  .login-card p {
+  .login-card > p {
     font-family: 'DM Mono', monospace;
-    font-size: 11px; color: var(--text-muted);
-    margin-bottom: 24px;
+    font-size: 10px; color: var(--text-3);
+    margin-bottom: 22px;
+    letter-spacing: 1.5px;
   }
 
-  .input-group { margin-bottom: 14px; }
+  .input-group { margin-bottom: 12px; }
 
   .input-group label {
     display: block;
     font-family: 'DM Mono', monospace;
-    font-size: 10px; color: var(--text-muted);
+    font-size: 9px; color: var(--text-3);
     letter-spacing: 2px; text-transform: uppercase;
     margin-bottom: 6px;
   }
 
   .input-group input {
     width: 100%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(149,213,178,0.2);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    color: #e8f5e9;
+    padding: 11px 14px;
+    color: var(--text);
     font-family: 'DM Mono', monospace;
     font-size: 13px;
     outline: none;
     transition: var(--transition);
   }
   .input-group input:focus {
-    border-color: var(--green-bright);
-    background: rgba(82,183,136,0.08);
-    box-shadow: 0 0 0 3px rgba(82,183,136,0.12);
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(58,125,92,0.1);
   }
-  .input-group input::placeholder { color: rgba(149,213,178,0.35); }
+  .input-group input::placeholder { color: var(--text-3); }
 
   .btn-primary {
     width: 100%;
-    background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+    background: var(--green);
     border: none; border-radius: var(--radius-sm);
-    padding: 14px;
+    padding: 13px;
     color: #fff;
     font-family: 'Syne', sans-serif;
-    font-size: 15px; font-weight: 700;
+    font-size: 14px; font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 4px 20px rgba(82,183,136,0.3);
     margin-top: 4px;
+    letter-spacing: 0.3px;
   }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(82,183,136,0.4); }
-  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:hover { background: #2f6649; }
+  .btn-primary:active { transform: scale(0.99); }
 
   .divider {
     display: flex; align-items: center; gap: 12px;
     margin: 18px 0;
   }
-  .divider-line { flex: 1; height: 1px; background: rgba(149,213,178,0.15); }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
   .divider span {
     font-family: 'DM Mono', monospace;
-    font-size: 10px; color: var(--text-muted);
+    font-size: 9px; color: var(--text-3);
     letter-spacing: 2px;
   }
 
@@ -203,30 +198,30 @@
 
   .btn-oauth {
     flex: 1;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(149,213,178,0.2);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 12px;
-    color: #e8f5e9;
+    padding: 11px;
+    color: var(--text-2);
     font-family: 'Syne', sans-serif;
     font-size: 13px; font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
-    display: flex; align-items: center; justify-content: center; gap: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
   }
-  .btn-oauth:hover { background: rgba(255,255,255,0.1); border-color: var(--green-bright); }
+  .btn-oauth:hover { border-color: var(--green); color: var(--green); }
 
   .magic-link {
-    text-align: center; margin-top: 18px;
+    text-align: center; margin-top: 16px;
     font-family: 'DM Mono', monospace;
-    font-size: 11px; color: var(--text-muted);
+    font-size: 10px; color: var(--text-3);
   }
-  .magic-link a { color: var(--green-light); text-decoration: none; cursor: pointer; }
-  .magic-link a:hover { color: var(--green-bright); }
+  .magic-link a { color: var(--green); text-decoration: none; cursor: pointer; }
+  .magic-link a:hover { text-decoration: underline; }
 
   /* ====== SCREEN 2: CONNECT ====== */
   #screen-connect {
-    background: linear-gradient(160deg, #0b2318 0%, #1a3a2a 100%);
+    background: var(--surface);
     padding: 60px 28px 40px;
     align-items: center;
     justify-content: center;
@@ -234,8 +229,8 @@
   }
 
   .connect-header { text-align: center; z-index: 1; }
-  .connect-header h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
-  .connect-header p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); }
+  .connect-header h2 { font-size: 22px; font-weight: 800; margin-bottom: 7px; }
+  .connect-header p { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: 1.5px; }
 
   .connect-visual {
     position: relative; z-index: 1;
@@ -246,19 +241,19 @@
   .connect-ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(82,183,136,0.2);
+    border: 1.5px solid rgba(58,125,92,0.18);
   }
   .ring1 { width: 200px; height: 200px; animation: pulse-ring 2s ease infinite; }
   .ring2 { width: 150px; height: 150px; animation: pulse-ring 2s 0.4s ease infinite; }
   .ring3 { width: 100px; height: 100px; animation: pulse-ring 2s 0.8s ease infinite; }
 
   .connect-device {
-    width: 64px; height: 64px;
-    background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
-    border-radius: 20px;
+    width: 60px; height: 60px;
+    background: var(--green-pale);
+    border-radius: 18px;
+    border: 1.5px solid rgba(58,125,92,0.2);
     display: flex; align-items: center; justify-content: center;
-    font-size: 30px;
-    box-shadow: 0 0 40px rgba(82,183,136,0.4);
+    font-size: 28px;
     position: relative; z-index: 1;
   }
 
@@ -266,36 +261,36 @@
 
   .device-item {
     display: flex; align-items: center; gap: 14px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 14px 16px;
     margin-bottom: 10px;
     cursor: pointer;
     transition: var(--transition);
   }
-  .device-item:hover { border-color: var(--green-bright); background: rgba(82,183,136,0.08); }
+  .device-item:hover { border-color: var(--green); background: var(--green-pale); }
 
   .device-dot {
     width: 8px; height: 8px; border-radius: 50%;
-    background: var(--green-bright);
-    box-shadow: 0 0 8px var(--green-bright);
+    background: var(--green);
     animation: blink 1.5s ease infinite;
+    flex-shrink: 0;
   }
 
   .device-info { flex: 1; }
-  .device-name { font-size: 14px; font-weight: 600; }
-  .device-id { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); }
+  .device-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .device-id { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); }
 
-  .device-signal { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green-light); }
+  .device-signal { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green); }
 
   /* ====== BOTTOM NAV ====== */
   .bottom-nav {
     position: absolute; bottom: 0; left: 0; right: 0;
     display: flex;
-    background: rgba(10,28,20,0.95);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(20px);
-    border-top: 1px solid var(--card-border);
+    border-top: 1.5px solid var(--border);
     padding: 12px 0 24px;
     z-index: 50;
   }
@@ -307,101 +302,95 @@
     transition: var(--transition);
     padding: 6px 0;
   }
-  .nav-item .nav-icon { font-size: 22px; }
+  .nav-item .nav-icon { font-size: 21px; }
   .nav-item .nav-label {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 1px;
-    color: var(--text-muted);
+    color: var(--text-3);
     text-transform: uppercase;
   }
-  .nav-item.active .nav-label { color: var(--green-bright); }
-  .nav-item.active .nav-icon { filter: drop-shadow(0 0 6px var(--green-bright)); }
+  .nav-item.active .nav-label { color: var(--green); font-weight: 500; }
 
   /* ====== SCREEN 3: DASHBOARD ====== */
   #screen-dashboard {
-    background: linear-gradient(160deg, #0b2318 0%, #152d20 100%);
+    background: var(--bg);
     padding: 0 0 80px;
   }
 
   .dash-header {
-    padding: 20px 24px 16px;
+    padding: 18px 22px 14px;
     display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid var(--card-border);
+    border-bottom: 1.5px solid var(--border);
+    background: var(--surface);
   }
 
-  .dash-greeting { font-size: 13px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
-  .dash-user { font-size: 18px; font-weight: 800; }
+  .dash-greeting { font-size: 12px; color: var(--text-3); font-family: 'DM Mono', monospace; }
+  .dash-user { font-size: 17px; font-weight: 800; color: var(--text); }
 
   .status-pill {
     display: flex; align-items: center; gap: 6px;
-    background: rgba(82,183,136,0.12);
-    border: 1px solid rgba(82,183,136,0.3);
+    background: var(--green-pale);
+    border: 1.5px solid rgba(58,125,92,0.2);
     border-radius: 20px;
-    padding: 6px 12px;
+    padding: 5px 11px;
     font-family: 'DM Mono', monospace;
-    font-size: 10px; color: var(--green-bright);
+    font-size: 9px; color: var(--green);
+    letter-spacing: 1px;
   }
   .status-pill .dot {
     width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green-bright);
+    background: var(--green);
     animation: blink 1.5s ease infinite;
   }
 
-  .dash-content { padding: 20px 24px; overflow-y: auto; }
+  .dash-content { padding: 18px 20px; overflow-y: auto; }
 
   .section-title {
     font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 3px;
-    color: var(--text-muted); text-transform: uppercase;
-    margin-bottom: 14px;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--text-3); text-transform: uppercase;
+    margin-bottom: 12px;
   }
 
   .sensor-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 22px;
   }
 
   .sensor-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 16px;
-    position: relative;
-    overflow: hidden;
+    padding: 15px;
     cursor: pointer;
     transition: var(--transition);
+    box-shadow: var(--shadow);
   }
-  .sensor-card:hover { border-color: rgba(149,213,178,0.4); transform: translateY(-2px); }
-  .sensor-card.alert { border-color: rgba(230,57,70,0.4); background: rgba(230,57,70,0.06); }
-  .sensor-card.alert .sensor-value { color: var(--red-alert); }
+  .sensor-card:hover { border-color: var(--border-strong); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+  .sensor-card.alert { border-color: rgba(192,57,43,0.25); background: var(--red-pale); }
+  .sensor-card.alert .sensor-value { color: var(--red); }
 
-  .sensor-glow {
-    position: absolute; top: -20px; right: -20px;
-    width: 70px; height: 70px; border-radius: 50%;
-    filter: blur(20px); opacity: 0.4;
-  }
-
-  .sensor-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .sensor-icon { font-size: 20px; margin-bottom: 10px; display: block; }
   .sensor-label {
     font-family: 'DM Mono', monospace;
-    font-size: 9px; color: var(--text-muted);
+    font-size: 9px; color: var(--text-3);
     letter-spacing: 2px; text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
-  .sensor-value { font-size: 26px; font-weight: 800; line-height: 1; }
-  .sensor-unit { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+  .sensor-value { font-size: 24px; font-weight: 800; line-height: 1; color: var(--text); }
+  .sensor-unit { font-size: 12px; font-weight: 400; color: var(--text-3); }
 
   .sensor-range {
     font-family: 'DM Mono', monospace;
-    font-size: 9px; margin-top: 8px;
+    font-size: 9px; margin-top: 7px;
   }
-  .in-range { color: var(--green-bright); }
-  .out-range { color: var(--red-alert); }
+  .in-range { color: var(--green); }
+  .out-range { color: var(--red); }
 
   .sensor-bar-bg {
-    height: 3px; background: rgba(255,255,255,0.08);
+    height: 3px; background: var(--border);
     border-radius: 2px; margin-top: 8px; overflow: hidden;
   }
   .sensor-bar-fill {
@@ -409,106 +398,111 @@
     transition: width 1s ease;
   }
 
-  /* Overview tabs */
+  /* Tabs */
   .tab-row {
-    display: flex; gap: 8px; margin-bottom: 16px;
+    display: flex; gap: 6px; margin-bottom: 16px;
   }
   .tab {
     flex: 1; text-align: center;
     padding: 8px;
     font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 1px;
+    font-size: 9px; letter-spacing: 1px;
     text-transform: uppercase;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition);
-    border: 1px solid transparent;
-    color: var(--text-muted);
+    border: 1.5px solid var(--border);
+    color: var(--text-3);
+    background: var(--surface);
   }
   .tab.active {
-    background: rgba(82,183,136,0.15);
-    border-color: rgba(82,183,136,0.3);
-    color: var(--green-bright);
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+    font-weight: 600;
   }
 
-  /* Graph area */
+  /* Graph */
   .graph-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 15px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
   }
 
   .graph-title {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
-  .graph-title span { font-size: 14px; font-weight: 700; }
+  .graph-title span { font-size: 13px; font-weight: 700; color: var(--text); }
   .graph-period {
     font-family: 'DM Mono', monospace;
-    font-size: 9px; color: var(--text-muted);
+    font-size: 9px; color: var(--text-3);
     letter-spacing: 1px;
   }
 
   svg.graph { width: 100%; height: 80px; }
 
-  /* Alerts section */
+  /* Alerts */
   .alert-card {
-    background: rgba(230,57,70,0.08);
-    border: 1px solid rgba(230,57,70,0.3);
+    background: var(--red-pale);
+    border: 1.5px solid rgba(192,57,43,0.2);
     border-radius: var(--radius);
-    padding: 14px 16px;
+    padding: 13px 15px;
     display: flex; align-items: center; gap: 12px;
     margin-bottom: 10px;
     cursor: pointer;
     transition: var(--transition);
   }
-  .alert-card:hover { background: rgba(230,57,70,0.14); }
+  .alert-card:hover { border-color: rgba(192,57,43,0.4); }
 
-  .alert-icon { font-size: 24px; }
+  .alert-icon { font-size: 22px; }
   .alert-info { flex: 1; }
-  .alert-title { font-size: 13px; font-weight: 700; color: #ff8fa3; }
-  .alert-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,143,163,0.7); }
+  .alert-title { font-size: 13px; font-weight: 700; color: var(--red); }
+  .alert-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(192,57,43,0.7); }
 
   .alert-action {
-    background: rgba(230,57,70,0.2);
-    border: 1px solid rgba(230,57,70,0.4);
-    border-radius: 8px; padding: 6px 10px;
+    background: rgba(192,57,43,0.1);
+    border: 1.5px solid rgba(192,57,43,0.25);
+    border-radius: 8px; padding: 5px 10px;
     font-family: 'DM Mono', monospace;
-    font-size: 9px; color: #ff8fa3;
+    font-size: 9px; color: var(--red);
     cursor: pointer; white-space: nowrap;
+    font-weight: 500;
   }
 
   /* ====== SCREEN 4: DATA ====== */
   #screen-data {
-    background: linear-gradient(160deg, #0b2318 0%, #152d20 100%);
+    background: var(--bg);
     padding: 0 0 80px;
   }
 
   .data-header {
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid var(--card-border);
+    padding: 18px 22px 14px;
+    border-bottom: 1.5px solid var(--border);
+    background: var(--surface);
   }
-  .data-header h2 { font-size: 22px; font-weight: 800; }
-  .data-header p { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .data-header h2 { font-size: 20px; font-weight: 800; color: var(--text); }
+  .data-header p { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--text-3); margin-top: 3px; letter-spacing: 1.5px; }
 
-  .data-content { padding: 20px 24px; overflow-y: auto; }
+  .data-content { padding: 18px 20px; overflow-y: auto; }
 
   .history-item {
     display: flex; align-items: center; gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(149,213,178,0.08);
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
   }
 
   .history-dot {
-    width: 10px; height: 10px; border-radius: 50%;
+    width: 9px; height: 9px; border-radius: 50%;
     flex-shrink: 0;
   }
 
   .history-info { flex: 1; }
-  .history-event { font-size: 13px; font-weight: 600; }
-  .history-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); }
+  .history-event { font-size: 13px; font-weight: 600; color: var(--text); }
+  .history-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); }
 
   .history-val {
     font-family: 'DM Mono', monospace;
@@ -517,130 +511,133 @@
 
   /* ====== SCREEN 5: SETTINGS ====== */
   #screen-settings {
-    background: linear-gradient(160deg, #0b2318 0%, #152d20 100%);
+    background: var(--bg);
     padding: 0 0 80px;
   }
 
   .settings-header {
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid var(--card-border);
+    padding: 18px 22px 14px;
+    border-bottom: 1.5px solid var(--border);
+    background: var(--surface);
   }
-  .settings-header h2 { font-size: 22px; font-weight: 800; }
+  .settings-header h2 { font-size: 20px; font-weight: 800; color: var(--text); }
 
-  .settings-content { padding: 20px 24px; overflow-y: auto; }
+  .settings-content { padding: 18px 20px; overflow-y: auto; }
 
-  .settings-section { margin-bottom: 28px; }
+  .settings-section { margin-bottom: 26px; }
   .settings-section-title {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 3px;
-    color: var(--text-muted); text-transform: uppercase;
-    margin-bottom: 12px;
+    color: var(--text-3); text-transform: uppercase;
+    margin-bottom: 10px;
   }
 
   .settings-item {
     display: flex; align-items: center;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    margin-bottom: 8px;
+    padding: 13px 15px;
+    margin-bottom: 7px;
     cursor: pointer;
     transition: var(--transition);
+    box-shadow: var(--shadow);
   }
-  .settings-item:hover { border-color: rgba(149,213,178,0.3); }
+  .settings-item:hover { border-color: var(--border-strong); }
 
-  .settings-item-icon { font-size: 20px; margin-right: 14px; }
+  .settings-item-icon { font-size: 19px; margin-right: 13px; }
   .settings-item-info { flex: 1; }
-  .settings-item-label { font-size: 14px; font-weight: 600; }
-  .settings-item-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); }
+  .settings-item-label { font-size: 14px; font-weight: 600; color: var(--text); }
+  .settings-item-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); }
 
   .toggle {
-    width: 44px; height: 24px;
-    background: rgba(255,255,255,0.1);
+    width: 42px; height: 23px;
+    background: var(--border-strong);
     border-radius: 12px; position: relative;
     transition: var(--transition);
     cursor: pointer;
     flex-shrink: 0;
   }
-  .toggle.on { background: var(--green-bright); }
+  .toggle.on { background: var(--green); }
   .toggle::after {
     content: '';
     position: absolute; top: 3px; left: 3px;
-    width: 18px; height: 18px; border-radius: 50%;
+    width: 17px; height: 17px; border-radius: 50%;
     background: white;
     transition: var(--transition);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   }
-  .toggle.on::after { left: 23px; }
+  .toggle.on::after { left: 22px; }
 
-  /* ====== MANUAL CONTROL MODAL ====== */
+  /* ====== MODAL ====== */
   .modal-overlay {
     display: none;
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(26,25,22,0.4);
     z-index: 100;
     align-items: flex-end;
     animation: fadeIn 0.2s ease;
+    backdrop-filter: blur(4px);
   }
   .modal-overlay.open { display: flex; }
 
   .modal-sheet {
     width: 100%;
-    background: #0d2b1e;
-    border-radius: 24px 24px 0 0;
-    border-top: 1px solid var(--card-border);
-    padding: 24px;
+    background: var(--surface);
+    border-radius: 22px 22px 0 0;
+    border-top: 1.5px solid var(--border);
+    padding: 22px;
     animation: slideUp 0.3s ease;
   }
 
   .modal-handle {
-    width: 40px; height: 4px;
-    background: rgba(149,213,178,0.3);
+    width: 38px; height: 4px;
+    background: var(--border-strong);
     border-radius: 2px;
-    margin: 0 auto 20px;
+    margin: 0 auto 18px;
   }
 
-  .modal-title { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-  .modal-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); margin-bottom: 24px; }
+  .modal-title { font-size: 19px; font-weight: 800; margin-bottom: 4px; color: var(--text); }
+  .modal-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); margin-bottom: 20px; letter-spacing: 1.5px; }
 
-  .control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 18px; }
 
   .control-btn {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 16px;
+    padding: 15px;
     cursor: pointer;
     text-align: center;
     transition: var(--transition);
-    color: #e8f5e9;
+    color: var(--text);
   }
-  .control-btn:hover { border-color: var(--green-bright); background: rgba(82,183,136,0.1); }
-  .control-btn .ctrl-icon { font-size: 28px; display: block; margin-bottom: 8px; }
-  .control-btn .ctrl-label { font-size: 13px; font-weight: 600; }
-  .control-btn .ctrl-desc { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+  .control-btn:hover { border-color: var(--green); background: var(--green-pale); }
+  .control-btn .ctrl-icon { font-size: 26px; display: block; margin-bottom: 7px; }
+  .control-btn .ctrl-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .control-btn .ctrl-desc { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--text-3); margin-top: 2px; }
 
   .btn-close-modal {
     width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--card-border);
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 14px;
-    color: var(--text-muted);
+    padding: 13px;
+    color: var(--text-2);
     font-family: 'Syne', sans-serif;
     font-size: 14px; font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
   }
-  .btn-close-modal:hover { background: rgba(255,255,255,0.09); }
+  .btn-close-modal:hover { border-color: var(--border-strong); }
 
   /* ====== ANIMATIONS ====== */
   @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
+    from { opacity: 0; transform: translateY(-16px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @keyframes fadeIn {
@@ -652,20 +649,20 @@
     to { transform: translateY(0); }
   }
   @keyframes pulse-ring {
-    0% { opacity: 0.6; transform: scale(0.95); }
-    50% { opacity: 0.15; transform: scale(1.05); }
-    100% { opacity: 0.6; transform: scale(0.95); }
+    0% { opacity: 0.7; transform: scale(0.96); }
+    50% { opacity: 0.15; transform: scale(1.04); }
+    100% { opacity: 0.7; transform: scale(0.96); }
   }
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
   }
   @keyframes data-tick {
-    from { opacity: 0.4; }
+    from { opacity: 0.5; }
     to { opacity: 1; }
   }
 
-  /* Desktop wrapper */
+  /* ====== DESKTOP WRAPPER ====== */
   .page-wrap {
     display: flex; align-items: flex-start; justify-content: center;
     min-height: 100vh; padding: 20px;
@@ -673,35 +670,35 @@
   }
 
   .page-info {
-    max-width: 280px;
+    max-width: 260px;
     padding-top: 80px;
     position: sticky; top: 40px;
   }
   .page-info h1 {
-    font-size: 42px; font-weight: 800; line-height: 1;
-    background: linear-gradient(135deg, var(--green-bright), var(--green-light));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
+    font-size: 40px; font-weight: 800; line-height: 1;
+    color: var(--text);
+    margin-bottom: 14px;
   }
+  .page-info h1 span { color: var(--green); }
   .page-info p {
     font-family: 'DM Mono', monospace;
-    font-size: 12px; color: var(--text-muted); line-height: 1.8;
-    margin-bottom: 24px;
+    font-size: 11px; color: var(--text-3); line-height: 1.8;
+    margin-bottom: 22px;
   }
-  .nav-buttons { display: flex; flex-direction: column; gap: 8px; }
+  .nav-buttons { display: flex; flex-direction: column; gap: 7px; }
   .nav-btn {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 10px; padding: 10px 16px;
-    color: var(--text-muted);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 9px; padding: 9px 14px;
+    color: var(--text-3);
     font-family: 'DM Mono', monospace;
-    font-size: 11px; cursor: pointer;
+    font-size: 10px; cursor: pointer;
     text-align: left; transition: var(--transition);
     letter-spacing: 1px;
   }
   .nav-btn:hover, .nav-btn.current {
-    border-color: var(--green-bright); color: var(--green-bright);
-    background: rgba(82,183,136,0.08);
+    border-color: var(--green); color: var(--green);
+    background: var(--green-pale);
   }
 
   @media (max-width: 700px) {
@@ -716,7 +713,7 @@
 
   <!-- SIDE INFO (desktop) -->
   <div class="page-info">
-    <h1>Agri<br>Duino</h1>
+    <h1>Agri<br><span>Duino</span></h1>
     <p>Smart hydroponics monitoring system. Real-time sensor data, automated alerts, and manual control — all in your pocket.</p>
     <div class="nav-buttons">
       <button class="nav-btn current" onclick="showScreen('login')">① Login / Auth</button>
@@ -733,8 +730,6 @@
 
     <!-- ===== SCREEN 1: LOGIN ===== -->
     <div id="screen-login" class="screen active">
-      <div class="bg-blob login-blob1"></div>
-      <div class="bg-blob login-blob2"></div>
       <div class="logo-wrap">
         <div class="logo-icon">🌿</div>
         <div class="logo-name">AgriDuino</div>
@@ -773,9 +768,8 @@
 
     <!-- ===== SCREEN 2: CONNECT ===== -->
     <div id="screen-connect" class="screen">
-      <div class="bg-blob login-blob1"></div>
       <div class="connect-header">
-        <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text-muted);margin-bottom:8px">STEP 2 OF 2</div>
+        <div style="font-size:10px;font-family:'DM Mono',monospace;color:var(--text-3);margin-bottom:8px;letter-spacing:2px;">STEP 2 OF 2</div>
         <h2>Connect Arduino</h2>
         <p>SCANNING FOR NEARBY IOT DEVICES</p>
       </div>
@@ -786,7 +780,7 @@
         <div class="connect-device">📡</div>
       </div>
       <div class="device-list" style="padding:0 28px;">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">FOUND DEVICES</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">FOUND DEVICES</div>
         <div class="device-item" onclick="showScreen('dashboard')">
           <div class="device-dot"></div>
           <div class="device-info">
@@ -796,12 +790,12 @@
           <div class="device-signal">-42 dBm</div>
         </div>
         <div class="device-item" onclick="showScreen('dashboard')">
-          <div class="device-dot" style="background:#e9c46a;box-shadow:0 0 8px #e9c46a;"></div>
+          <div class="device-dot" style="background:var(--amber);"></div>
           <div class="device-info">
             <div class="device-name">AgriDuino Node #2</div>
             <div class="device-id">UUID: AD-2024-B8C2</div>
           </div>
-          <div class="device-signal">-67 dBm</div>
+          <div class="device-signal" style="color:var(--amber);">-67 dBm</div>
         </div>
       </div>
       <div style="padding:0 28px;width:100%">
@@ -825,7 +819,7 @@
       <div class="dash-content" style="flex:1;overflow-y:auto;">
         <div class="tab-row">
           <div class="tab active" id="tab-overview" onclick="switchTab('overview')">Overview</div>
-          <div class="tab" id="tab-alerts" onclick="switchTab('alerts')">Alerts <span id="alert-badge" style="background:var(--red-alert);border-radius:8px;padding:1px 5px;font-size:9px;margin-left:2px;">2</span></div>
+          <div class="tab" id="tab-alerts" onclick="switchTab('alerts')">Alerts <span id="alert-badge" style="background:var(--red);color:white;border-radius:8px;padding:1px 5px;font-size:8px;margin-left:2px;">2</span></div>
         </div>
 
         <!-- OVERVIEW TAB -->
@@ -833,43 +827,39 @@
           <div class="section-title">Sensor Readings</div>
           <div class="sensor-grid">
             <div class="sensor-card" onclick="openModal()">
-              <div class="sensor-glow" style="background:#52b788;"></div>
               <span class="sensor-icon">⚗️</span>
               <div class="sensor-label">pH Level</div>
               <div class="sensor-value">6.8<span class="sensor-unit"> pH</span></div>
               <div class="sensor-range in-range">✓ 6.0–7.0 optimal</div>
               <div class="sensor-bar-bg">
-                <div class="sensor-bar-fill" style="width:68%;background:var(--green-bright);"></div>
+                <div class="sensor-bar-fill" style="width:68%;background:var(--green);"></div>
               </div>
             </div>
             <div class="sensor-card alert" onclick="openModal()">
-              <div class="sensor-glow" style="background:#e63946;"></div>
               <span class="sensor-icon">🌡️</span>
               <div class="sensor-label">Water Temp</div>
               <div class="sensor-value">28.4<span class="sensor-unit">°C</span></div>
               <div class="sensor-range out-range">⚠ Target: 18–24°C</div>
               <div class="sensor-bar-bg">
-                <div class="sensor-bar-fill" style="width:85%;background:var(--red-alert);"></div>
+                <div class="sensor-bar-fill" style="width:85%;background:var(--red);"></div>
               </div>
             </div>
             <div class="sensor-card" onclick="openModal()">
-              <div class="sensor-glow" style="background:#e9c46a;"></div>
               <span class="sensor-icon">🧪</span>
               <div class="sensor-label">Nutrients</div>
               <div class="sensor-value">1420<span class="sensor-unit"> ppm</span></div>
               <div class="sensor-range in-range">✓ 1200–1600 ppm</div>
               <div class="sensor-bar-bg">
-                <div class="sensor-bar-fill" style="width:55%;background:#e9c46a;"></div>
+                <div class="sensor-bar-fill" style="width:55%;background:var(--amber);"></div>
               </div>
             </div>
             <div class="sensor-card alert" onclick="openModal()">
-              <div class="sensor-glow" style="background:#e63946;"></div>
               <span class="sensor-icon">💧</span>
               <div class="sensor-label">Water Level</div>
               <div class="sensor-value">22<span class="sensor-unit">%</span></div>
               <div class="sensor-range out-range">⚠ Below 30% min</div>
               <div class="sensor-bar-bg">
-                <div class="sensor-bar-fill" style="width:22%;background:var(--red-alert);"></div>
+                <div class="sensor-bar-fill" style="width:22%;background:var(--red);"></div>
               </div>
             </div>
           </div>
@@ -883,21 +873,16 @@
             <svg class="graph" viewBox="0 0 300 80">
               <defs>
                 <linearGradient id="phGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#52b788" stop-opacity="0.4"/>
-                  <stop offset="100%" stop-color="#52b788" stop-opacity="0"/>
+                  <stop offset="0%" stop-color="#3a7d5c" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#3a7d5c" stop-opacity="0"/>
                 </linearGradient>
               </defs>
-              <!-- Range band -->
-              <rect x="0" y="20" width="300" height="30" fill="rgba(82,183,136,0.08)" rx="2"/>
-              <!-- Area -->
+              <rect x="0" y="20" width="300" height="30" fill="rgba(58,125,92,0.06)" rx="2"/>
               <path d="M0,45 L50,40 L100,38 L150,42 L200,35 L250,30 L300,28 L300,80 L0,80 Z" fill="url(#phGrad)"/>
-              <!-- Line -->
-              <path d="M0,45 L50,40 L100,38 L150,42 L200,35 L250,30 L300,28" fill="none" stroke="#52b788" stroke-width="2" stroke-linecap="round"/>
-              <!-- Dots -->
-              <circle cx="300" cy="28" r="4" fill="#52b788"/>
-              <!-- Labels -->
-              <text x="0" y="75" fill="rgba(149,213,178,0.5)" font-size="8" font-family="monospace">6h ago</text>
-              <text x="260" y="75" fill="rgba(149,213,178,0.5)" font-size="8" font-family="monospace">now</text>
+              <path d="M0,45 L50,40 L100,38 L150,42 L200,35 L250,30 L300,28" fill="none" stroke="#3a7d5c" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="300" cy="28" r="3.5" fill="#3a7d5c"/>
+              <text x="0" y="75" fill="#9b9790" font-size="8" font-family="monospace">6h ago</text>
+              <text x="260" y="75" fill="#9b9790" font-size="8" font-family="monospace">now</text>
             </svg>
           </div>
 
@@ -910,23 +895,23 @@
             <svg class="graph" viewBox="0 0 300 80">
               <defs>
                 <linearGradient id="tempGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#e63946" stop-opacity="0.4"/>
-                  <stop offset="100%" stop-color="#e63946" stop-opacity="0"/>
+                  <stop offset="0%" stop-color="#c0392b" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#c0392b" stop-opacity="0"/>
                 </linearGradient>
               </defs>
-              <rect x="0" y="25" width="300" height="25" fill="rgba(82,183,136,0.08)" rx="2"/>
+              <rect x="0" y="25" width="300" height="25" fill="rgba(58,125,92,0.06)" rx="2"/>
               <path d="M0,50 L50,48 L100,46 L150,45 L200,40 L250,35 L300,28 L300,80 L0,80 Z" fill="url(#tempGrad)"/>
-              <path d="M0,50 L50,48 L100,46 L150,45 L200,40 L250,35 L300,28" fill="none" stroke="#e63946" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="300" cy="28" r="4" fill="#e63946"/>
-              <text x="0" y="75" fill="rgba(149,213,178,0.5)" font-size="8" font-family="monospace">6h ago</text>
-              <text x="260" y="75" fill="rgba(149,213,178,0.5)" font-size="8" font-family="monospace">now</text>
+              <path d="M0,50 L50,48 L100,46 L150,45 L200,40 L250,35 L300,28" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="300" cy="28" r="3.5" fill="#c0392b"/>
+              <text x="0" y="75" fill="#9b9790" font-size="8" font-family="monospace">6h ago</text>
+              <text x="260" y="75" fill="#9b9790" font-size="8" font-family="monospace">now</text>
             </svg>
           </div>
         </div>
 
         <!-- ALERTS TAB -->
         <div id="tab-content-alerts" style="display:none;">
-          <div class="section-title" style="color:var(--red-alert);">Active Alerts</div>
+          <div class="section-title" style="color:var(--red);">Active Alerts</div>
           <div class="alert-card" onclick="openModal()">
             <div class="alert-icon">🌡️</div>
             <div class="alert-info">
@@ -943,22 +928,22 @@
             </div>
             <div class="alert-action">FIX →</div>
           </div>
-          <div class="section-title" style="margin-top:20px;">System Status</div>
+          <div class="section-title" style="margin-top:18px;">System Status</div>
           <div class="history-item">
-            <div class="history-dot" style="background:var(--green-bright);"></div>
+            <div class="history-dot" style="background:var(--green);"></div>
             <div class="history-info">
               <div class="history-event">pH within optimal range</div>
               <div class="history-time">Updated 30s ago</div>
             </div>
-            <div class="history-val" style="color:var(--green-bright);">6.8</div>
+            <div class="history-val" style="color:var(--green);">6.8</div>
           </div>
           <div class="history-item">
-            <div class="history-dot" style="background:#e9c46a;"></div>
+            <div class="history-dot" style="background:var(--amber);"></div>
             <div class="history-info">
               <div class="history-event">Nutrient monitoring active</div>
               <div class="history-time">Updated 30s ago</div>
             </div>
-            <div class="history-val" style="color:#e9c46a;">1420</div>
+            <div class="history-val" style="color:var(--amber);">1420</div>
           </div>
         </div>
       </div>
@@ -1025,56 +1010,56 @@
       <div class="data-content" style="flex:1;overflow-y:auto;">
         <div class="section-title">Today's Log</div>
         <div class="history-item">
-          <div class="history-dot" style="background:var(--red-alert);"></div>
+          <div class="history-dot" style="background:var(--red);"></div>
           <div class="history-info">
             <div class="history-event">Alert: Water temp high</div>
             <div class="history-time">09:42 AM — 15 min ago</div>
           </div>
-          <div class="history-val" style="color:var(--red-alert);">28.4°C</div>
+          <div class="history-val" style="color:var(--red);">28.4°C</div>
         </div>
         <div class="history-item">
-          <div class="history-dot" style="background:var(--green-bright);"></div>
+          <div class="history-dot" style="background:var(--green);"></div>
           <div class="history-info">
             <div class="history-event">pH calibrated, in range</div>
             <div class="history-time">08:15 AM — 1.5h ago</div>
           </div>
-          <div class="history-val" style="color:var(--green-bright);">6.8</div>
+          <div class="history-val" style="color:var(--green);">6.8</div>
         </div>
         <div class="history-item">
-          <div class="history-dot" style="background:#e9c46a;"></div>
+          <div class="history-dot" style="background:var(--amber);"></div>
           <div class="history-info">
             <div class="history-event">Nutrient top-up added</div>
             <div class="history-time">07:00 AM — 3h ago</div>
           </div>
-          <div class="history-val" style="color:#e9c46a;">+120ppm</div>
+          <div class="history-val" style="color:var(--amber);">+120ppm</div>
         </div>
         <div class="history-item">
-          <div class="history-dot" style="background:var(--green-bright);"></div>
+          <div class="history-dot" style="background:var(--green);"></div>
           <div class="history-info">
             <div class="history-event">System check passed</div>
             <div class="history-time">06:00 AM — 4h ago</div>
           </div>
-          <div class="history-val" style="color:var(--green-bright);">OK</div>
+          <div class="history-val" style="color:var(--green);">OK</div>
         </div>
-        <div class="section-title" style="margin-top:20px;">Yesterday</div>
+        <div class="section-title" style="margin-top:18px;">Yesterday</div>
         <div class="history-item">
-          <div class="history-dot" style="background:var(--red-alert);"></div>
+          <div class="history-dot" style="background:var(--red);"></div>
           <div class="history-info">
             <div class="history-event">Low water level alert</div>
             <div class="history-time">Yesterday, 3:20 PM</div>
           </div>
-          <div class="history-val" style="color:var(--red-alert);">18%</div>
+          <div class="history-val" style="color:var(--red);">18%</div>
         </div>
         <div class="history-item">
-          <div class="history-dot" style="background:var(--green-bright);"></div>
+          <div class="history-dot" style="background:var(--green);"></div>
           <div class="history-info">
             <div class="history-event">Reservoir refilled</div>
             <div class="history-time">Yesterday, 3:45 PM</div>
           </div>
-          <div class="history-val" style="color:var(--green-bright);">85%</div>
+          <div class="history-val" style="color:var(--green);">85%</div>
         </div>
 
-        <div class="section-title" style="margin-top:20px;">Weekly Averages</div>
+        <div class="section-title" style="margin-top:18px;">Weekly Averages</div>
         <div class="graph-card">
           <div class="graph-title">
             <span>pH — 7 Days</span>
@@ -1083,15 +1068,15 @@
           <svg class="graph" viewBox="0 0 300 80">
             <defs>
               <linearGradient id="weekGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#52b788" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="#52b788" stop-opacity="0"/>
+                <stop offset="0%" stop-color="#3a7d5c" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#3a7d5c" stop-opacity="0"/>
               </linearGradient>
             </defs>
-            <rect x="0" y="20" width="300" height="35" fill="rgba(82,183,136,0.07)" rx="2"/>
+            <rect x="0" y="20" width="300" height="35" fill="rgba(58,125,92,0.05)" rx="2"/>
             <path d="M0,42 L43,38 L86,44 L129,36 L172,40 L215,33 L258,30 L300,28 L300,80 L0,80 Z" fill="url(#weekGrad)"/>
-            <path d="M0,42 L43,38 L86,44 L129,36 L172,40 L215,33 L258,30 L300,28" fill="none" stroke="#52b788" stroke-width="1.5" stroke-linecap="round"/>
-            <text x="0" y="75" fill="rgba(149,213,178,0.4)" font-size="7" font-family="monospace">Mon</text>
-            <text x="255" y="75" fill="rgba(149,213,178,0.4)" font-size="7" font-family="monospace">Sun</text>
+            <path d="M0,42 L43,38 L86,44 L129,36 L172,40 L215,33 L258,30 L300,28" fill="none" stroke="#3a7d5c" stroke-width="1.5" stroke-linecap="round"/>
+            <text x="0" y="75" fill="#9b9790" font-size="7" font-family="monospace">Mon</text>
+            <text x="255" y="75" fill="#9b9790" font-size="7" font-family="monospace">Sun</text>
           </svg>
         </div>
       </div>
@@ -1150,7 +1135,7 @@
               <div class="settings-item-label">pH Range</div>
               <div class="settings-item-desc">Current: 6.0 – 7.0</div>
             </div>
-            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green-bright);">Edit →</span>
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);">Edit →</span>
           </div>
           <div class="settings-item">
             <span class="settings-item-icon">🌡️</span>
@@ -1158,7 +1143,7 @@
               <div class="settings-item-label">Temperature</div>
               <div class="settings-item-desc">Current: 18 – 24°C</div>
             </div>
-            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green-bright);">Edit →</span>
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);">Edit →</span>
           </div>
           <div class="settings-item">
             <span class="settings-item-icon">🧪</span>
@@ -1166,7 +1151,7 @@
               <div class="settings-item-label">Nutrients (ppm)</div>
               <div class="settings-item-desc">Current: 1200 – 1600</div>
             </div>
-            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green-bright);">Edit →</span>
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);">Edit →</span>
           </div>
           <div class="settings-item">
             <span class="settings-item-icon">💧</span>
@@ -1174,7 +1159,7 @@
               <div class="settings-item-label">Water Level Min</div>
               <div class="settings-item-desc">Current: 30%</div>
             </div>
-            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green-bright);">Edit →</span>
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);">Edit →</span>
           </div>
         </div>
 
@@ -1186,7 +1171,7 @@
               <div class="settings-item-label">AgriDuino Node #1</div>
               <div class="settings-item-desc">Connected — AD-2024-F3A1</div>
             </div>
-            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green-bright);">●</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green);">●</span>
           </div>
           <div class="settings-item">
             <span class="settings-item-icon">🔄</span>
@@ -1194,7 +1179,7 @@
               <div class="settings-item-label">Sync Interval</div>
               <div class="settings-item-desc">Every 30 seconds</div>
             </div>
-            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green-bright);">Edit →</span>
+            <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);">Edit →</span>
           </div>
         </div>
 
@@ -1250,13 +1235,11 @@
     });
     document.getElementById('screen-' + name).classList.add('active');
 
-    // Update side nav
     sideNavBtns.forEach(btn => {
       btn.classList.remove('current');
       if (btn.getAttribute('onclick').includes(name)) btn.classList.add('current');
     });
 
-    // Close modal if open
     document.getElementById('modal-control').classList.remove('open');
   }
 
@@ -1272,19 +1255,15 @@
   }
 
   function closeModal(e) {
-    if (e.target === document.getElementById('modal-control')) {
-      closeModalDirect();
-    }
+    if (e.target === document.getElementById('modal-control')) closeModalDirect();
   }
 
   function closeModalDirect() {
     document.getElementById('modal-control').classList.remove('open');
   }
 
-  // Simulate live sensor updates
   function tickSensors() {
     const sensors = document.querySelectorAll('.sensor-value');
-    // Just animate opacity to suggest live updating
     sensors.forEach(s => {
       s.style.animation = 'none';
       setTimeout(() => s.style.animation = 'data-tick 0.4s ease', 50);
